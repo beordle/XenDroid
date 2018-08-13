@@ -1,0 +1,831 @@
+[
+    {
+        "class": "android.telephony.TelephoneManager",
+        "method": "getDeviceId",
+        "category": "Identifiers",
+        "params": [],
+        "hooked_params": {}
+    },
+    {
+        "class": "android.telephony.TelephoneManager",
+        "method": "getDeviceId",
+        "category": "Identifiers",
+        "params": ["int"],
+        "hooked_params": {}
+    },
+    {
+        "class": "android.telephony.TelephoneManager",
+        "method": "getSubscriberId",
+        "category": "Identifiers",
+        "params": [],
+        "hooked_params": {}
+    },
+    {
+        "class": "android.telephony.TelephoneManager",
+        "method": "getLine1Number",
+        "category": "Identifiers",
+        "params": [],
+        "hooked_params": {}
+    },
+    {
+        "class": "android.telephony.TelephoneManager",
+        "method": "getNetworkOperator",
+        "category": "Identifiers",
+        "params": [],
+        "hooked_params": {}
+    },
+    {
+        "class": "android.telephony.TelephoneManager",
+        "method": "getNetworkOperatorName",
+        "category": "Identifiers",
+        "params": [],
+        "hooked_params": {}
+
+    },
+    {
+        "class": "android.net.wifi.WifiInfo",
+        "method": "getMacAddress",
+        "category": "Identifiers",
+        "params": [],
+        "hooked_params": {}
+    },
+    {
+        "class": "android.telephony.TelephoneManager",
+        "method": "getSimOperator",
+        "category": "Identifiers",
+        "params": [],
+        "hooked_params": {}
+    },
+    {
+        "class": "android.telephony.TelephoneManager",
+        "method": "getSimOperatorName",
+        "category": "Identifiers",
+        "params": [],
+        "hooked_params": {}
+    },
+    {
+        "class": "android.telephony.TelephoneManager",
+        "method": "getSimCountryIso",
+        "category": "Identifiers",
+        "params": [],
+        "hooked_params": {}
+    },
+    {
+        "class": "android.telephony.TelephoneManager",
+        "method": "getSimSerialNumber",
+        "category": "Identifiers",
+        "params": [],
+        "hooked_params": {}
+    },
+    {
+        "class": "android.telephony.TelephoneManager",
+        "method": "getNetworkCountryIso",
+        "category": "Identifiers",
+        "params": [],
+        "hooked_params": {}
+    },
+    {
+        "class": "android.telephony.TelephoneManager",
+        "method": "getDeviceSoftwareVersion",
+        "category": "Identifiers",
+        "params": [],
+        "hooked_params": {}
+    },
+    {
+        "class": "android.telephony.TelephoneManager",
+        "method": "getImei",
+        "category": "Identifiers",
+        "params": [],
+        "hooked_params": {}
+    },
+    {
+        "class": "android.telephony.TelephoneManager",
+        "method": "getImei",
+        "category": "Identifiers",
+        "params": ["int"],
+        "hooked_params": {}
+    },
+    {
+        "class": "android.telephony.TelephoneManager",
+        "method": "getMeid",
+        "category": "Identifiers",
+        "params": [],
+        "hooked_params": {}
+    },
+    {
+        "class": "android.telephony.TelephoneManager",
+        "method": "getMeid",
+        "category": "Identifiers",
+        "params": ["int"],
+        "hooked_params": {}
+    },
+    {
+        "class": "android.app.SharedPreferencesImpl$EditorImpl",
+        "method": "putFloat",
+        "category": "Application preferences",
+        "params": ["java.lang.String", "float"],
+        "hooked_params": {"Key": 0, "Value": 1}
+    },
+    {
+        "class": "android.app.SharedPreferencesImpl$EditorImpl",
+        "method": "putBoolean",
+        "category": "Application preferences",
+        "params": ["java.lang.String", "boolean"],
+        "hooked_params": {"Key": 0, "Value": 1}
+    },
+    {
+        "class": "android.app.SharedPreferencesImpl$EditorImpl",
+        "method": "putInt",
+        "category": "Application preferences",
+        "params": ["java.lang.String", "int"],
+        "hooked_params": {"Key": 0, "Value": 1}
+    },
+    {
+        "class": "android.app.SharedPreferencesImpl$EditorImpl",
+        "method": "putLong",
+        "category": "Application preferences",
+        "params": ["java.lang.String", "long"],
+        "hooked_params": {"Key": 0, "Value": 1}
+    },
+    {
+        "class": "android.app.SharedPreferencesImpl$EditorImpl",
+        "method": "putString",
+        "category": "Application preferences",
+        "params": ["java.lang.String", "java.lang.String"],
+        "hooked_params": {"Key": 0, "Value": 1}
+    },
+    {
+        "class": "android.app.SharedPreferencesImpl",
+        "method": "getBoolean",
+        "category": "Application preferences",
+        "params": ["java.lang.String", "boolean"],
+        "hooked_params": {"Key": 0}
+    },
+    {
+        "class": "android.app.SharedPreferencesImpl",
+        "method": "getFloat",
+        "category": "Application preferences",
+        "params": ["java.lang.String", "float"],
+        "hooked_params": {"Key": 0}
+    },
+    {
+        "class": "android.app.SharedPreferencesImpl",
+        "method": "getInt",
+        "category": "Application preferences",
+        "params": ["java.lang.String", "int"],
+        "hooked_params": {"Key": 0}
+    },
+    {
+        "class": "android.app.SharedPreferencesImpl",
+        "method": "getLong",
+        "category": "Application preferences",
+        "params": ["java.lang.String", "long"],
+        "hooked_params": {"Key": 0}
+    },
+    {
+        "class": "android.app.SharedPreferencesImpl",
+        "method": "getString",
+        "category": "Application preferences",
+        "params": ["java.lang.String", "java.lang.String"],
+        "hooked_params": {"Key": 0}
+    },
+    {
+        "class": "android.app.SharedPreferencesImpl",
+        "method": "getAll",
+        "category": "Application preferences",
+        "params": [],
+        "hooked_params": {}
+    },
+    {
+        "class": "android.content.ContentResolver",
+        "method": "insert",
+        "category": "Application data and storage",
+        "params": ["android.net.Uri", "android.content.ContentValues"],
+        "hooked_params": {"URI": 0}
+    },
+    {
+        "class": "android.content.ContentResolver",
+        "method": "query",
+        "category": "Application data and storage",
+        "params": ["android.net.Uri", "[Ljava.lang.String", "java.lang.String", "[Ljava.lang.String",
+          "java.lang.String"],
+        "hooked_params": {"URI": 0, "Columns": 1, "Selection": 2, "Selection values": 3}
+    },
+    {
+        "class": "android.content.ContentResolver",
+        "method": "delete",
+        "category": "Application data and storage",
+        "params": ["android.net.Uri", "java.lang.String", "[Ljava.lang.String"],
+        "hooked_params": {"URI": 0, "Selection": 1, "Selection values": 2}
+    },
+    {
+        "class": "android.database.sqlite.SQLiteDatabase",
+        "method": "insertWithOnConflict",
+        "category": "Application data and storage",
+        "params": ["java.lang.String", "java.lang.String", "android.content.ContentValues", "int"],
+        "hooked_params": {}
+    },
+    {
+        "class": "android.database.sqlite.SQLiteDatabase",
+        "method": "rawQueryWithFactory",
+        "category": "Application data and storage",
+        "params": ["android.database.sqlite.SQLiteDatabase$CursorFactory", "java.lang.String",
+          "[Ljava.lang.String", "java.lang.String", "android.os.CancellationSignal"],
+        "hooked_params": {"SQL query": 1, "Selection values": 2}
+    },
+    {
+        "class": "android.database.sqlite.SQLiteDatabase",
+        "method": "delete",
+        "category": "Application data and storage",
+        "params": ["java.lang.String", "java.lang.String", "[Ljava.lang.String"],
+        "hooked_params": {"Table": 0, "Selection": 1, "Selection values": 2}
+    },
+    {
+        "class": "android.database.sqlite.SQLiteDatabase",
+        "method": "execSQL",
+        "category": "Application data and storage",
+        "params": ["java.lang.String"],
+        "hooked_params": {"Command": 0}
+    },
+    {
+        "class": "dalvik.system.BaseDexClassLoader",
+        "method": "findResource",
+        "category": "Dynamically loaded libraries and files",
+        "params": ["java.lang.String"],
+        "hooked_params": {"Resource name": 0}
+    },
+    {
+        "class": "dalvik.system.BaseDexClassLoader",
+        "method": "findResources",
+        "category": "Dynamically loaded libraries and files",
+        "params": ["java.lang.String"],
+        "hooked_params": {"Resource name": 0}
+    },
+    {
+        "class": "dalvik.system.BaseDexClassLoader",
+        "method": "findLibrary",
+        "category": "Dynamically loaded libraries and files",
+        "params": ["java.lang.String"],
+        "hooked_params": {"Library name": 0}
+    },
+    {
+        "class": "dalvik.system.BaseDexClassLoader",
+        "method": "findClass",
+        "category": "Dynamically loaded libraries and files",
+        "params": ["java.lang.String"],
+        "hooked_params": {"Class name": 0}
+    },
+    {
+        "class": "dalvik.system.BaseDexClassLoader",
+        "method": "$init",
+        "category": "Dynamically loaded libraries and files",
+        "params": ["java.lang.String", "java.lang.String", "java.lang.String", "java.lang.ClassLoader"],
+        "hooked_params": {"Dex file path": 0, "Library path": 2}
+    },
+    {
+        "class": "dalvik.system.DexFile",
+        "method": "$init",
+        "category": "Dynamically loaded libraries and files",
+        "params": ["java.lang.String"],
+        "hooked_params": {"Dex file path": 0}
+    },
+    {
+        "class": "dalvik.system.DexFile",
+        "method": "$init",
+        "category": "Dynamically loaded libraries and files",
+        "params": ["java.io.File"],
+        "hooked_params": {"Dex file path": 0}
+    },
+    {
+        "class": "dalvik.system.DexFile",
+        "method": "loadDex",
+        "category": "Dynamically loaded libraries and files",
+        "params": ["java.lang.String", "java.lang.String", "int"],
+        "hooked_params": {"Dex file path": 0}
+    },
+    {
+        "class": "java.lang.Runtime",
+        "method": "load",
+        "category": "Dynamically loaded libraries and files",
+        "params": ["java.lang.String"],
+        "hooked_params": {"Library path": 0}
+    },
+    {
+        "class": "java.lang.Runtime",
+        "method": "loadLibrary",
+        "category": "Dynamically loaded libraries and files",
+        "params": ["java.lang.String"],
+        "hooked_params": {"Library name": 0}
+    },
+    {
+        "class": "android.app.ActivityManager",
+        "method": "getRunningAppProcesses",
+        "category": "Process administration",
+        "params": [],
+        "hooked_params": {}
+    },
+    {
+        "class": "android.app.ActivityManager",
+        "method": "getRunningTasks",
+        "category": "Process administration",
+        "params": [],
+        "hooked_params": {}
+    },
+    {
+        "class": "android.app.ActivityManager",
+        "method": "getRunningServices",
+        "category": "Process administration",
+        "params": [],
+        "hooked_params": {}
+    },
+    {
+        "class": "android.app.ActivityManager",
+        "method": "killBackgroundProcesses",
+        "category": "Process administration",
+        "params": ["java.lang.String"],
+        "hooked_params": {"Package name": 0}
+    },
+    {
+        "class": "android.app.usage.UsageStatsManager ",
+        "method": "queryUsageStats",
+        "category": "Process administration",
+        "params": ["int", "long", "long"],
+        "hooked_params": {}
+    },
+    {
+        "class": "android.os.Process",
+        "method": "killProcess",
+        "category": "Process administration",
+        "params": ["int"],
+        "hooked_params": {}
+    },
+    {
+        "class": "android.os.Process",
+        "method": "start",
+        "category": "Process administration",
+        "params": ["java.lang.String", "java.lang.String", "int", "int", "[I", "int",
+          "int", "[Ljava.lang.String"],
+        "hooked_params": {"Target class": 0}
+    },
+    {
+        "class": "android.content.ContextWrapper",
+        "method": "startActivity",
+        "category": "Intents sent",
+        "params": ["android.content.Intent"],
+        "hooked_params": {"Description": 0}
+    },
+    {
+        "class": "android.content.ContextWrapper",
+        "method": "startService",
+        "category": "Intents sent",
+        "params": ["android.content.Intent"],
+        "hooked_params": {"Description": 0}
+    },
+    {
+        "class": "android.content.ContextWrapper",
+        "method": "sendBroadcast",
+        "category": "Intents sent",
+        "params": ["android.content.Intent"],
+        "hooked_params": {"Description": 0}
+    },
+    {
+        "class": "android.content.ContextWrapper",
+        "method": "startActivities",
+        "category": "Intents sent",
+        "params": ["[Landroid.content.Intent"],
+        "hooked_params": {"Description": 0}
+    },
+    {
+        "class": "android.app.Activity",
+        "method": "startActivityForResult",
+        "category": "Intents sent",
+        "params": ["android.content.Intent"],
+        "hooked_params": {"Description": 0}
+    },
+    {
+        "class": "android.content.Context",
+        "method": "registerReceiver",
+        "category": "Broadcast receivers",
+        "params": ["android.content.BroadcastReceiver", "android.content.IntentFilter",
+          "java.lang.String", "android.os.Handler"],
+        "hooked_params": {}
+    },
+    {
+        "class": "android.app.ActivityThread",
+        "method": "handleReceiver",
+        "category": "Broadcast receivers",
+        "params": ["android.app.ActivityThread$ReceiverData"],
+        "hooked_params": {}
+    },
+    {
+        "class": "android.util.Base64",
+        "method": "decode",
+        "category": "Cryptography",
+        "params": ["[B", "int", "int", "int"],
+        "hooked_params": {}
+    },
+    {
+        "class": "android.util.Base64",
+        "method": "encode",
+        "category": "Cryptography",
+        "params": ["[B", "int", "int", "int"],
+        "hooked_params": {}
+    },
+    {
+        "class": "javax.crypto.spec.SecretKeySpec",
+        "method": "$init",
+        "category": "Cryptography",
+        "params": ["[B", "int", "int", "java.lang.String"],
+        "hooked_params": {"Algorithm": 3, "Key":0}
+    },
+    {
+        "class": "javax.crypto.Cipher",
+        "method": "doFinal",
+        "category": "Cryptography",
+        "params": [],
+        "hooked_params": {}
+    },
+    {
+        "class": "javax.crypto.Cipher",
+        "method": "doFinal",
+        "category": "Cryptography",
+        "params": ["[B"],
+        "hooked_params": {"Plain text": 0}
+    },
+    {
+        "class": "javax.crypto.Cipher",
+        "method": "doFinal",
+        "category": "Cryptography",
+        "params": ["[B", "int", "int", "[B"],
+        "hooked_params": {"Plain text": 0}
+    },
+    {
+        "class": "javax.crypto.Cipher",
+        "method": "doFinal",
+        "category": "Cryptography",
+        "params": ["[B", "int", "int", "[B", "int"],
+        "hooked_params": {"Plain text": 0}
+    },
+    {
+        "class": "javax.crypto.Cipher",
+        "method": "doFinal",
+        "category": "Cryptography",
+        "params": ["[B", "int", "int"],
+        "hooked_params": {"Plain text": 0}
+    },
+    {
+        "class": "javax.crypto.Cipher",
+        "method": "update",
+        "category": "Cryptography",
+        "params": ["[B"],
+        "hooked_params": {"Plain text": 0}
+    },
+    {
+        "class": "javax.crypto.Cipher",
+        "method": "update",
+        "category": "Cryptography",
+        "params": ["[B", "int", "int"],
+        "hooked_params": {"Plain text": 0}
+    },
+    {
+        "class": "javax.crypto.Cipher",
+        "method": "update",
+        "category": "Cryptography",
+        "params": ["[B", "int", "int", "[B"],
+        "hooked_params": {"Plain text": 0}
+    },
+    {
+        "class": "javax.crypto.Cipher",
+        "method": "update",
+        "category": "Cryptography",
+        "params": ["[B", "int", "int", "[B", "int"],
+        "hooked_params": {"Plain text": 0}
+    },
+    {
+        "class": "javax.crypto.Mac",
+        "method": "doFinal",
+        "category": "Cryptography",
+        "params": [],
+        "hooked_params": {}
+    },
+    {
+        "class": "javax.crypto.Mac",
+        "method": "doFinal",
+        "category": "Cryptography",
+        "params": ["[B"],
+        "hooked_params": {"Plain text": 0}
+    },
+    {
+        "class": "javax.crypto.Mac",
+        "method": "update",
+        "category": "Cryptography",
+        "params": ["[B"],
+        "hooked_params": {"Plain text": 0}
+    },
+    {
+        "class": "javax.crypto.Mac",
+        "method": "update",
+        "category": "Cryptography",
+        "params": ["[B", "int", "int"],
+        "hooked_params": {"Plain text": 0}
+    },
+    {
+        "class": "java.lang.ProcessBuilder",
+        "method": "start",
+        "category": "Shell commands",
+        "params": [],
+        "hooked_params": {}
+    },
+    {
+        "class": "java.lang.Runtime",
+        "method": "exec",
+        "category": "Shell commands",
+        "params": ["java.lang.String"],
+        "hooked_params": {"Command": 0}
+    },
+    {
+        "class": "android.content.ContentResolver",
+        "method": "registerContentObserver",
+        "category": "Content and phone state inspection",
+        "params": ["android.net.Uri", "boolean", "android.database.ContentObserver"],
+        "hooked_params": {"URI": 0}
+    },
+    {
+        "class": "android.accounts.AccountManager",
+        "method": "getAccountsByType",
+        "category": "Content and phone state inspection",
+        "params": ["java.lang.String"],
+        "hooked_params": {"Token": 0}
+    },
+    {
+        "class": "android.accounts.AccountManager",
+        "method": "getAccounts",
+        "category": "Content and phone state inspection",
+        "params": [],
+        "hooked_params": {}
+    },
+    {
+        "class": "android.media.AudioRecord",
+        "method": "startRecording",
+        "category": "Content and phone state inspection",
+        "params": [],
+        "hooked_params": {}
+    },
+    {
+        "class": "android.media.AudioRecord",
+        "method": "startRecording",
+        "category": "Content and phone state inspection",
+        "params": ["android.media.MediaSyncEvent"],
+        "hooked_params": {}
+    },
+    {
+        "class": "android.media.MediaRecorder",
+        "method": "start",
+        "category": "Content and phone state inspection",
+        "params": [],
+        "hooked_params": {}
+    },
+    {
+        "class": "android.content.pm.PackageManager",
+        "method": "getInstalledPackages",
+        "category": "Content and phone state inspection",
+        "params": ["int"],
+        "hooked_params": {}
+    },
+    {
+        "class": "android.content.pm.PackageManager",
+        "method": "getInstalledApplications",
+        "category": "Content and phone state inspection",
+        "params": ["int"],
+        "hooked_params": {}
+    },
+    {
+        "class": "android.os.Debug",
+        "method": "isDebuggerConnected",
+        "category": "Content and phone state inspection",
+        "params": [],
+        "hooked_params": {}
+    },
+    {
+        "class": "android.location.Location",
+        "method": "distanceTo",
+        "category": "Content and phone state inspection",
+        "params": ["android.location.Location"],
+        "hooked_params": {}
+    },
+    {
+        "class": "android.location.Location",
+        "method": "getLatitude",
+        "category": "Content and phone state inspection",
+        "params": [],
+        "hooked_params": {}
+    },
+    {
+        "class": "android.location.Location",
+        "method": "getLongitude",
+        "category": "Content and phone state inspection",
+        "params": [],
+        "hooked_params": {}
+    },
+    {
+        "class": "android.telephony.TelephonyManager",
+        "method": "listen",
+        "category": "Content and phone state inspection",
+        "params": ["android.telephony.PhoneStateListener", "int"],
+        "hooked_params": {"Event value": 1}
+    },
+    {
+        "class": "android.content.pm.PackageManager",
+        "method": "setComponentEnabledSetting",
+        "category": "Phone state modification",
+        "params": ["android.content.ComponentName", "int", "int"],
+        "hooked_params": {"Component name": 0}
+    },
+    {
+        "class": "android.app.NotificationManager",
+        "method": "notify",
+        "category": "Phone state modification",
+        "params": ["java.lang.String", "int", "android.app.Notification"],
+        "hooked_params": {"Description": 2}
+    },
+    {
+        "class": "android.app.AlarmManager",
+        "method": "setAlarmClock",
+        "params": ["android.app.AlarmManager$AlarmClockInfo", "android.app.PendingIntent"],
+        "hooked_params": {}
+    },
+    {
+        "class": "android.app.AlarmManager",
+        "method": "set",
+        "category": "Phone state modification",
+        "params": ["int", "long", "android.app.PendingIntent"],
+        "hooked_params": {}
+    },
+    {
+        "class": "android.telephony.SmsManager",
+        "method": "sendDataMessage",
+        "category": "SMS/MMS messages",
+        "params": ["java.lang.String", "java.lang.String", "short", "[B",
+          "android.app.PendingIntent", "android.app.PendingIntent"],
+        "hooked_params": {"Destination": 0}
+    },
+    {
+        "class": "android.telephony.SmsManager",
+        "method": "sendMultimediaMessage",
+        "category": "SMS/MMS messages",
+        "params": ["android.content.Context", "android.net.Uri", "java.lang.String",
+          "android.os.Bundle", "android.app.PendingIntent"],
+        "hooked_params": {"Destination": 2, "URI": 1}
+    },
+    {
+        "class": "android.telephony.SmsManager",
+        "method": "sendMultipartTextMessage",
+        "category": "SMS/MMS messages",
+        "params": ["java.lang.String", "java.lang.String", "java.util.ArrayList",
+          "java.util.ArrayList", "java.util.ArrayList"],
+        "hooked_params": {"Destination": 0, "Data": 2}
+    },
+    {
+        "class": "android.telephony.SmsManager",
+        "method": "sendTextMessage",
+        "category": "SMS/MMS messages",
+        "params": ["java.lang.String", "java.lang.String", "java.lang.String",
+          "android.app.PendingIntent", "android.app.PendingIntent"],
+        "hooked_params": {"Destination": 0, "Data": 2}
+    },
+    {
+        "class": "android.telephony.SmsManager",
+        "method": "sendTextMessageWithoutPersisting",
+        "category": "SMS/MMS messages",
+        "params": ["java.lang.String", "java.lang.String", "java.lang.String",
+          "android.app.PendingIntent", "android.app.PendingIntent"],
+        "hooked_params": {"Destination": 0, "Data": 2}
+    },
+    {
+        "class": "java.lang.reflect.Method",
+        "method": "invoke",
+        "category": "Reflection calls",
+        "params": ["java.lang.Object", "[Ljava.lang.Object"],
+        "hooked_params": {"Method name": 0}
+    },
+    {
+        "class": "java.lang.reflect.Field",
+        "method": "get",
+        "category": "Reflection calls",
+        "params": ["java.lang.Object"],
+        "hooked_params": {"Field name": 0}
+    },
+    {
+        "class": "java.lang.Class",
+        "method": "forName",
+        "category": "Reflection calls",
+        "params": ["java.lang.String"],
+        "hooked_params": {"Class name": 0}
+    },
+    {
+        "class": "java.lang.Class",
+        "method": "forName",
+        "category": "Reflection calls",
+        "params": ["java.lang.String", "boolean", "java.lang.ClassLoader"],
+        "hooked_params": {"Class name": 0}
+    },
+    {
+        "class": "android.content.ContextWrapper",
+        "method": "openFileOutput",
+        "category": "Files access by application",
+        "params": ["java.lang.String", "int"],
+        "hooked_params": {}
+    },
+    {
+        "class": "android.content.ContextWrapper",
+        "method": "openFileInput",
+        "category": "Files accessed",
+        "params": ["java.lang.String"],
+        "hooked_params": {}
+    },
+    {
+        "class": "java.io.File",
+        "method": "exists",
+        "category": "Files accessed",
+        "params": [],
+        "hooked_params": {}
+    },
+    {
+        "class": "java.io.FileOutputStream",
+        "method": "write",
+        "category": "Files accessed",
+        "params": ["[B"],
+        "hooked_params": {"Data": 0}
+    },
+    {
+        "class": "java.io.FileOutputStream",
+        "method": "write",
+        "category": "Files accessed",
+        "params": ["[B", "int", "int"],
+        "hooked_params": {"Data": 0}
+    },
+    {
+        "class": "java.io.FileInputStream",
+        "method": "read",
+        "category": "Files accessed",
+        "params": ["[B"],
+        "hooked_params": {}
+    },
+    {
+        "class": "java.io.FileInputStream",
+        "method": "read",
+        "category": "Files accessed",
+        "params": ["[B", "int", "int"],
+        "hooked_params": {}
+    },
+    {
+        "class": "java.net.URL",
+        "method": "openConnection",
+        "category": "Networking utility",
+        "params": [],
+        "hooked_params": {}
+    },
+    {
+        "class": "java.net.URL",
+        "method": "openConnection",
+        "category": "Networking utility",
+        "params": ["java.net.Proxy"],
+        "hooked_params": {"Proxy": 0}
+    },
+    {
+        "class": "java.net.ProxySelectorImpl",
+        "method": "select",
+        "category": "Networking utility",
+        "params": ["java.net.URI"],
+        "hooked_params": {"URI": 0}
+    },
+    {
+        "class": "android.webkit.WebView",
+        "method": "addJavascriptInterface",
+        "category": "Networking utility",
+        "params": ["java.lang.Object", "java.lang.String"],
+        "hooked_params": {}
+    },
+    {
+        "class": "android.webkit.WebView",
+        "method": "setWebChromeClient",
+        "category": "Networking utility",
+        "params": ["android.webkit.WebChromeClient"],
+        "hooked_params": {}
+    },
+    {
+        "class": "android.webkit.WebView",
+        "method": "setWebViewClient",
+        "category": "Networking utility",
+        "params": ["android.webkit.WebViewClient"],
+        "hooked_params": {}
+    },
+    {
+        "class": "org.apache.http.impl.client.AbstractHttpClient",
+        "method": "execute",
+        "category": "Networking utility",
+        "params": ["org.apache.http.HttpHost", "org.apache.http.HttpRequest",
+          "org.apache.http.protocol.HttpContext"],
+        "hooked_params": {"Target": 0}
+    }
+]
