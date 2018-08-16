@@ -1,17 +1,69 @@
+#!/usr/bin/env python
+
+# Copyright (C) 2018  Muhammed Ziad
+# This file is part of XenDroid - https://github.com/muhzii/XenDroid
+#
+# An instrumented sandbox for Android
+# This program is a free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License
+
+
+import argparse
+import subprocess
+import time
 import logging
+
+from modules.definitions.exceptions import XenDroidDependencyError
 from modules.analysis_manager import AnalysisManager
 
 
-class XenDroid(object):
+def parse_args():
 
-    def __init__(self, apk_path, device_serial, debug_mode):
+    """
+    Parse command line arguments
+    :return:
+    """
+    parser = argparse.ArgumentParser(description="Analyse malware dynamically on your real device/ emulator")
 
-        logging.basicConfig(level=logging.DEBUG if debug_mode else logging.INFO)
-        self.logger = logging.getLogger(self.__class__.__name__)
-        self.apk_path = apk_path
-        self.device_serial = device_serial
+    parser.add_argument("-s", action="store", required=True, dest="serial",
+                        help="device serial as per the output of 'adb devices'")
 
-    def run(self):
+    parser.add_argument("-p", action="store", required=True, dest="path_to_apk", help="path to the apk file")
 
-        analysis = AnalysisManager(self.apk_path, self.device_serial)
-        analysis.start()
+    parser.add_argument("-d", action="store_true", required=False, dest="debug_mode", help="run XenDroid in debug mode")
+
+    options = parser.parse_args()
+    return options
+
+
+def run():
+    options = parse_args()
+
+    if options.serial is None:
+        cmd = ["adb", "devices"]
+        try:
+            r = subprocess.check_output(cmd).split('\n')
+        except OSError as e:
+            raise XenDroidDependencyError(e, cmd[0])
+
+        if len(r) < 4:
+            print 'Waiting for a connected device...'
+            while True:
+                r = subprocess.check_output(cmd).split('\n')
+                if len(r) == 4:
+                    break
+            options.serial = r[1].split('\t')[0]
+        elif len(r) > 4:
+            print 'More than one device is attached, try with -s to specify a device serial'
+            time.sleep(2)
+            return
+        else:
+            options.serial = r[1].split('\t')[0]
+
+    logging.basicConfig(level=logging.DEBUG if options.debug_mode else logging.INFO)
+    AnalysisManager(options.path_to_apk, options.serial).start()
+    return
+
+
+if __name__ == "__main__":
+    run()

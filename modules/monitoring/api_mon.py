@@ -1,6 +1,11 @@
-# This module monitors the android APIs defined in the JSON file, which are called during the runtime of the application
+# Copyright (C) 2018  Muhammed Ziad
+# This file is part of XenDroid - https://github.com/muhzii/XenDroid
+#
+# An instrumented sandbox for Android
+# This program is a free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License
 
-from modules.definitions.abstract import RunTimeModule
+
 from modules.definitions.constants import ROOT_DIR
 import frida
 import logging
@@ -187,11 +192,9 @@ class ScriptFactory(object):
             return gen_func()
 
 
-class ProcessMonitor(RunTimeModule):
+class APIMonitor(object):
 
     def __init__(self, package_name, device_serial, analysis_path):
-
-        RunTimeModule.__init__(self)
 
         self.logger = logging.getLogger(self.__class__.__name__)
 
@@ -229,7 +232,8 @@ class ProcessMonitor(RunTimeModule):
     def __log_script_messages(self, message, data):
 
         if message['type'] == 'send':
-            self.logs_dumper.debug(message['payload'])
+            if 'payload' in message:
+                self.logs_dumper.debug(message['payload'])
         elif message['type'] == 'error':
             self.errors_dumper.debug(message)
 

@@ -1,6 +1,14 @@
-# This is the interface for adb
+# Copyright (C) 2018  Muhammed Ziad
+# This file is part of XenDroid - https://github.com/muhzii/XenDroid
+#
+# An instrumented sandbox for Android
+# This program is a free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License
+
+
 import subprocess
 import logging
+
 from modules.definitions.exceptions import XenDroidConnectionError
 from multiprocessing import Process
 
@@ -24,46 +32,47 @@ class ADB(object):
     def run_cmd(self, extra_args):
         """
         run an adb command and return the output
-        :return: output of adb command
+        :return: output of adb command or None
         @param extra_args: arguments to run in adb
         """
         if isinstance(extra_args, str) or isinstance(extra_args, unicode):
             extra_args = extra_args.split()
-        if not isinstance(extra_args, list):
-            msg = "invalid arguments: %s\nshould be list or str, %s given" % (extra_args, type(extra_args))
-            self.logger.error(msg)
 
         args = [] + self.cmd_prefix
         args += extra_args
 
-        try:
-            r = subprocess.check_output(args).strip()
-        except subprocess.CalledProcessError:
-            raise XenDroidConnectionError('adb command execution failed: {}'.format(' '.join(args)))
-        return r
+        p = subprocess.Popen(args, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
+        out, err = p.communicate()
+
+        if err:
+            msg = 'adb command: `{}` failed\n{}'.format(' '.join(args[1:]), err)
+            raise XenDroidConnectionError(msg)
+
+        if out == '':
+            return None
+        else:
+            return out
 
     def shell(self, extra_args):
         """
         run an `adb shell` command
         @param extra_args:
-        @return: output of adb shell command
+        @return: output of adb shell command or None
         """
         if isinstance(extra_args, str) or isinstance(extra_args, unicode):
             extra_args = extra_args.split()
-        if not isinstance(extra_args, list):
-            msg = "invalid arguments: %s\nshould be list or str, %s given" % (extra_args, type(extra_args))
-            self.logger.error(msg)
 
         shell_extra_args = ['shell'] + extra_args
         return self.run_cmd(shell_extra_args)
 
-    def check_connectivity(self):
+    def install(self, apk_path):
+
         """
-        check if adb is connected
-        :return: True for connected
+        install application on device with `adb install`
+        :param apk_path: Path to the APK file
+        :return:
         """
-        r = self.run_cmd("get-state")
-        return r.startswith("device")
+        self.run_cmd('install %s' % apk_path)
 
     def unlock(self):
         """
@@ -88,7 +97,7 @@ class ADB(object):
         self.shell("uiautomator dump")
         layout = self.shell("cat /mnt/sdcard/window_dump.xml")
 
-        if element_name in layout:
+        if element_name.lower() in layout.lower():
             bounds = layout.split(element_name)[1].split("bounds=")[1].split()[0].split("][")[0][2:]
             x, y = map(int, bounds.split(","))
 
@@ -125,13 +134,13 @@ class ADB(object):
 
     def backup_device(self, backup_to_path):
 
-        self.logger.info('Backing up the device.')
+        self.logger.info('Backing up the device...')
         extra_arg = 'backup -all -f {}'.format(backup_to_path)
         proc = Process(target=ADB.run_cmd, args=(self, extra_arg))
         proc.start()
 
         while proc.is_alive():
-            coords = self.get_on_screen_element_coordinates_by_text("Back up my data")
+            coords = self.get_on_screen_element_coordinates_by_text("back up my data")
             if coords is not None:
                 self.touch(coords[0], coords[1])
         proc.join()
@@ -176,4 +185,16 @@ class ADB(object):
             return output.split('\n')[0].split()[1]
 
     def restore_backup(self, backup_path):
-        pass
+
+        self.logger.info('Restoring the device state from backup')
+
+        extra_arg = 'restore {}'.format(backup_path)
+        proc = Process(target=ADB.run_cmd, args=(self, extra_arg))
+        proc.start()
+
+        while proc.is_alive():
+            coords = self.get_on_screen_element_coordinates_by_text("restore my data")
+            if coords is not None:
+                self.touch(coords[0], coords[1])
+        proc.join()
+        self.logger.info('Device restored successfully!')

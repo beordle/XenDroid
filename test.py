@@ -18,11 +18,7 @@ def get_messages_from_js(message, data):
 
 def get_hook_code():
 
-    return \
-        """
-        Java.perform(function(){
-            var hook = Java.use("com.example.muhzi.trial.MainActivity");
-        """
+    return ''
 
 
 process = frida.get_device_manager().get_device("emulator-5554").attach(package_name)

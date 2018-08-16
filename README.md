@@ -4,3 +4,4 @@ An Android instrumented sandbox which uses some of [frida](https://github.com/fr
 Still doesn't include:
  - Monitoring network traffic
  - Analysing Memory access by the application 
+ - Add support for multi-sample analysis
