@@ -1,11 +1,9 @@
 backports.lzma
 requests
 frida
-flex
 android sdk with path variable pointing to build tools and platform tools
 android sdk version >=4.2
 DroidBot installed to path
-Android NDK
 Python == 2.7
 JDK >= 1.7
 androguard
