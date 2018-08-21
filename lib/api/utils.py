@@ -11,7 +11,7 @@ import subprocess
 import os
 import requests
 
-from modules.definitions.exceptions import XenDroidDependencyError
+from lib.definitions.exceptions import XenDroidDependencyError
 
 try:
     import backports.lzma
@@ -36,12 +36,12 @@ def get_package_name(path_to_apk):
     return package_name
 
 
-def download_and_extract_archive_from_url(url, file_path):
+def download_and_extract_archive_from_url(url, t_path):
 
     """
     download archive from url, extract it then return the data
     :param url:
-    :param file_path:
+    :param t_path: Target path for the downloaded file
     :return: extracted data
     """
     req = requests.get(url, stream=True)
@@ -51,15 +51,15 @@ def download_and_extract_archive_from_url(url, file_path):
 
         # Downloading and writing the archive.
         req.raw.decode_content = True
-        with open(file_path, "wb") as fh:
+        with open(t_path, "wb") as fh:
             for chunk in req.iter_content(1024):
                 fh.write(chunk)
 
         # Extracting data from the archive
-        with backports.lzma.open(file_path) as fh:
+        with backports.lzma.open(t_path) as fh:
             data = fh.read()
 
-        os.unlink(file_path)
+        os.unlink(t_path)
 
     return data
 

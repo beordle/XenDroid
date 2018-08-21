@@ -21,7 +21,7 @@ sys.excepthook = exception_hook
 class XenDroidDependencyError(Exception):
 
     def __init__(self, err, arg=''):
-        msg = err
+        msg = err.message
         if isinstance(err, ImportError):
             msg = 'The module `{}` is missing, try installing with `pip`'.format(err.message.split()[-1])
         elif isinstance(err, OSError):

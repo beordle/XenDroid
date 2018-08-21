@@ -9,10 +9,9 @@
 import logging
 import os
 
-from modules.api.utils import download_and_extract_archive_from_url, get_filename_from_path
-from modules.connection.adb import ADB
-from modules.definitions.constants import MISC_FOLDER
-from modules.definitions.exceptions import XenDroidStartupError, XenDroidDependencyError
+from lib.api.utils import download_and_extract_archive_from_url, get_filename_from_path
+from lib.definitions.constants import MISC_FOLDER, UTILS_FOLDER
+from lib.definitions.exceptions import XenDroidStartupError, XenDroidDependencyError
 
 try:
     from frida import __version__ as FRIDA_VERSION
@@ -20,114 +19,134 @@ try:
 except ImportError as e:
     raise XenDroidDependencyError(e)
 
+logger = logging.getLogger('Startup')
 
-class DependenciesBuilder(object):
+adb_connection, device_arch, frida_server_fp = None, None, None
 
-    def __init__(self, device_serial):
 
-        self.logger = logging.getLogger(self.__class__.__name__)
-        self.adb_connection = ADB(device_serial)
+def remove_apps_data_on_device():
 
-        self.device_arch = self.adb_connection.get_device_arch()
-        if self.device_arch is None:
-            raise XenDroidStartupError('Unable to determine device architecture')
+    """
+    Remove application's data from all the installed apps
+    :return:
+    """
 
-        self.frida_server_path = \
-            os.path.join(MISC_FOLDER, 'frida-server-{}-android-{}.xz'.
-                         format(self.device_arch, FRIDA_VERSION))
+    t_folders = ('files', 'databases'
+                          'shared_prefs')
 
-    def remove_user_files(self):
+    packages = adb_connection.shell('ls /data/data').split('\n')
 
-        """
-        Remove user files from the device storage to prepare for running the sample
-        :return:
-        """
+    for package_name in packages:
+        for folder_name in t_folders:
+            cmd = 'su -c rm /data/data/{}/{}/*'.format(package_name, folder_name)
+            adb_connection.shell(cmd)
 
-        all_dirs = self.adb_connection.shell('ls -R').split('\n\n')
 
-        extensions = ('.jpg', '.png',
-                      '.jpeg', '.mp4'
-                               '.db', '.xml')
+def remove_user_files():
 
-        self.logger.info('Safe deleting your data before running the target application...')
+    """
+    Remove user files from the device storage to prepare for running the sample
+    :return:
+    """
 
-        for _dir in all_dirs:
-            dir_name = _dir.split(':')[0]
-            dir_files = _dir.split(':')[1].split('\n')
+    all_dirs = adb_connection.shell('ls -R').split('\n\n')
 
-            for filename in dir_files:
-                if filename.lower().endswith(extensions):
-                    self.adb_connection.shell('su -c rm {}/{}'.format(dir_name, filename))
+    extensions = ('.jpg', '.png',
+                  '.jpeg', '.mp4'
+                           '.db', '.xml')
 
-        self.remove_apps_data_on_device()
+    logger.info('Safe deleting your data before running the target application...')
 
-    def remove_apps_data_on_device(self):
+    for _dir in all_dirs:
+        dir_name = _dir.split(':')[0]
+        dir_files = _dir.split(':')[1].split('\n')
 
-        """
-        Remove application's data from all the installed apps
-        :return:
-        """
+        for filename in dir_files:
+            if filename.lower().endswith(extensions):
+                adb_connection.shell('su -c rm {}/{}'.format(dir_name, filename))
 
-        t_folders = ('files', 'databases'
-                              'shared_prefs')
+    remove_apps_data_on_device()
 
-        packages = self.adb_connection.shell('ls /data/data').split('\n')
 
-        for package_name in packages:
-            for folder_name in t_folders:
-                cmd = 'su -c rm /data/data/{}/{}/*'.format(package_name, folder_name)
-                self.adb_connection.shell(cmd)
+def download_frida_server():
 
-    def download_frida_server(self):
+    # inspired from: https://github.com/AndroidTamer/frida-push
+    """
+    Download the compatible frida version with the one installed on the system
+    extracting the compressed file
+    """
+    logger.debug('Downloading the frida server...')
 
-        # inspired from: https://github.com/AndroidTamer/frida-push
-        """Download the compatible frida version with the one installed on the system
-        extracting the compressed file
-        """
+    url = "https://github.com/frida/frida/releases/download/{}/{}". \
+        format(FRIDA_VERSION, get_filename_from_path(frida_server_fp))
 
-        self.logger.debug('Downloading the frida server...')
+    f_name = url.split('/')[-1]
+    f_path = os.path.join(MISC_FOLDER, f_name)
 
-        url = "https://github.com/frida/frida/releases/download/{}/{}". \
-            format(FRIDA_VERSION, get_filename_from_path(self.frida_server_path))
+    data = download_and_extract_archive_from_url(url, f_path)
 
-        f_name = url.split('/')[-1]
-        f_path = os.path.join(MISC_FOLDER, f_name)
+    if data:
+        with open(f_path[:-3], "wb") as frida_server:
+            frida_server.write(data)
+    else:
+        raise XenDroidStartupError('frida server download failed, aborting...')
 
-        data = download_and_extract_archive_from_url(url, f_path)
 
-        if data:
-            with open(f_path[:-3], "wb") as frida_server:
-                frida_server.write(data)
-        else:
-            raise XenDroidStartupError('frida server download failed, aborting...')
+def push_and_execute_frida():
 
-    def push_and_execute_frida(self):
+    """
+    Push the frida server file and run the server on the device
+    :return:
+    """
+    logger.debug('Pushing and running the frida server on the device...')
+    t_executable = '/data/local/tmp/frida-server'
 
-        """
-        Push the frida server file and run the server on the device
-        :return:
-        """
+    adb_connection.push_to_tmp(frida_server_fp, t_executable)
 
-        push_cmd = 'push {} /data/local/tmp/frida-server'.format(self.frida_server_path)
+    shell_cmds = ['chmod 0755 {}'.format(t_executable), 'killall frida-server',
+                  '{}&'.format(t_executable)]
 
-        shell_cmds = ['chmod 0755 /data/local/tmp/frida-server',
-                      'killall frida-server', '/data/local/tmp/frida-server&']
+    for cmd in shell_cmds:
+        adb_connection.shell('su -c {}'.format(cmd))
 
-        self.logger.debug('Pushing and running the frida server on the device...')
 
-        self.adb_connection.run_cmd(push_cmd)
-        for cmd in shell_cmds:
-            self.adb_connection.shell('su -c {}'.format(cmd))
+def push_tcpdump():
 
-    def start(self):
+    """
+    Push the compiled tcpdump executable for the connected device
+    :return:
+    """
+    t_executable = '/data/local/tmp/tcpdump'
+    tcpdump_sp = os.path.join(UTILS_FOLDER, 'tcpdump', device_arch[:3])
 
-        self.adb_connection.run_cmd('root')
-        self.adb_connection.run_cmd('remount')
+    adb_connection.push_to_tmp(tcpdump_sp, t_executable)
 
-        self.remove_user_files()
 
-        if not self.frida_server_path.exists():
-            self.download_frida_server()
-        self.push_and_execute_frida()
+def run_startup(_connection):
 
-        self.logger.debug('Device is ready!')
+    global adb_connection, device_arch, frida_server_fp
+
+    os.makedirs(MISC_FOLDER)
+
+    adb_connection = _connection
+    device_arch = adb_connection.get_device_arch()
+
+    if device_arch is None:
+        raise XenDroidStartupError('Unable to determine device architecture')
+
+    frida_server_fp = \
+        os.path.join(MISC_FOLDER, 'frida-server-{}-android-{}.xz'.
+                     format(device_arch, FRIDA_VERSION))
+
+    adb_connection.run_cmd('root')
+    adb_connection.run_cmd('remount')
+
+    remove_user_files()
+
+    if not frida_server_fp.exists():
+        download_frida_server()
+    push_and_execute_frida()
+
+    push_tcpdump()
+
+    logger.debug('Device is ready!')

@@ -10,15 +10,20 @@ import os
 import time
 import logging
 
-from modules.api.utils import get_package_name
-from modules.definitions.constants import ANALYSES_DIR
+from lib.api.utils import get_package_name, get_filename_from_path
+from lib.definitions.constants import ANALYSES_DIR
 from modules.monitoring.api_mon import APIMonitor
-from modules.startup import DependenciesBuilder
+from modules.monitoring.tcpdump import TCPDUMP
 from modules.connection.droidbot import DroidBot
 from modules.connection.adb import ADB
+from modules import startup
 
 
 class AnalysisManager(object):
+
+    """
+    Launches an analysis task
+    """
 
     def __init__(self, apk_path, device_serial):
 
@@ -37,10 +42,12 @@ class AnalysisManager(object):
 
     def start(self):
 
+        self.logger.info('Analysis started with task ID: '
+                         + get_filename_from_path(self.analysis_path))
         self.adb_connection.unlock()
         # store a backup of the device's current state
         self.adb_connection.backup_device(self.backup_path)
-        DependenciesBuilder(self.device_serial).start()
+        startup.run_startup(self.adb_connection)
 
         # install the target application
         self.adb_connection.install(self.apk_path)
@@ -51,12 +58,15 @@ class AnalysisManager(object):
         self.adb_connection.start_app(package_name)
 
         # start api hooking ... but suspend target app before
-        self.adb_connection.suspend_app(pid)
+        self.adb_connection.suspend_process(pid)
 
         api_monitor = APIMonitor(package_name, self.device_serial, self.analysis_path)
-        api_monitor.run()
+        api_monitor.start()
 
-        self.adb_connection.resume_app(pid)
+        tcpdump = TCPDUMP(self.adb_connection, self.analysis_path)
+        tcpdump.start()
+
+        self.adb_connection.resume_process(pid)
 
         # interact with the device using DroidBot: https://github.com/honeynet/droidbot
         DroidBot().interact()

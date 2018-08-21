@@ -13,7 +13,7 @@ import subprocess
 import time
 import logging
 
-from modules.definitions.exceptions import XenDroidDependencyError
+from lib.definitions.exceptions import XenDroidDependencyError
 from modules.analysis_manager import AnalysisManager
 
 

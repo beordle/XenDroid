@@ -6,12 +6,13 @@
 # it under the terms of the GNU General Public License
 
 
-from modules.definitions.constants import ROOT_DIR
 import frida
 import logging
 import os
 import json
 import re
+
+from lib.definitions.constants import ROOT_DIR
 
 
 class ScriptFactory(object):
@@ -22,6 +23,9 @@ class ScriptFactory(object):
 
     def __init__(self, hook_def):
 
+        """
+        :param hook_def: JSON object that defines a method hook
+        """
         self.cls_name = hook_def['class']
         self.method_name = hook_def['method']
         self.method_params_types = hook_def['params']
@@ -202,16 +206,18 @@ class APIMonitor(object):
         self.device_serial = device_serial
         self.analysis_path = analysis_path
 
-        self.logs_file_path = os.path.join(analysis_path, 'logs', 'frida_logs.log')
-        self.errors_file_path = os.path.join(analysis_path, 'logs', 'frida_errors_logs.log')
+        self.logs_file = os.path.join(analysis_path, 'logs', 'frida_logs.log')
+        self.errors_file = os.path.join(analysis_path, 'logs', 'frida_errors_logs.log')
 
-        self.hook_file_path = os.path.join(ROOT_DIR, 'utils', 'hooking', 'hooks_def.json')
+        self.hooks_file = os.path.join(ROOT_DIR, 'utils', 'hooking', 'hooks_def.json')
 
         self.logs_dumper = None
         self.errors_dumper = None
         self.init_dumping()
 
     def init_dumping(self):
+
+        os.makedirs(os.path.dirname(self.logs_file))
 
         # initialize the logging to dump logs to a file that will contain the hooking logs
         self.logs_dumper = logging.getLogger()
@@ -220,30 +226,30 @@ class APIMonitor(object):
         self.errors_dumper.setLevel(logging.DEBUG)
         self.logs_dumper.setLevel(logging.DEBUG)
 
-        logs_fh = logging.FileHandler(self.logs_file_path)
+        logs_fh = logging.FileHandler(self.logs_file)
         logs_fh.setLevel(logging.DEBUG)
 
-        errors_fh = logging.FileHandler(self.errors_file_path)
+        errors_fh = logging.FileHandler(self.errors_file)
         errors_fh.setLevel(logging.DEBUG)
 
         self.logs_dumper.addHandler(logs_fh)
         self.errors_dumper.addHandler(errors_fh)
 
-    def __log_script_messages(self, message, data):
+    def __log_script_messages(self, message, payload):
 
         if message['type'] == 'send':
             if 'payload' in message:
-                self.logs_dumper.debug(message['payload'])
+                self.logs_dumper.debug(payload)
         elif message['type'] == 'error':
             self.errors_dumper.debug(message)
 
-    def run(self):
+    def start(self):
 
         # first: attach to the process
         session = frida.get_device_manager().get_device(self.device_serial).attach(self.package_name)
 
         # load the file that contains the scripts definitions
-        hooks_def = json.load(open(self.hook_file_path, 'r'))
+        hooks_def = json.load(open(self.hooks_file, 'r'))
 
         # loop through all the hooks in the json file
         for hook in hooks_def:
@@ -256,3 +262,6 @@ class APIMonitor(object):
             script.load()
 
         self.logger.debug('successfully started the process monitoring module ...')
+
+    def stop(self):
+        pass
