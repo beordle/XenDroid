@@ -1,41 +1,41 @@
 [
     {
-        "class": "android.telephony.TelephoneManager",
+        "class": "android.telephony.TelephonyManager",
         "method": "getDeviceId",
         "category": "Identifiers",
         "params": [],
         "hooked_params": {}
     },
     {
-        "class": "android.telephony.TelephoneManager",
+        "class": "android.telephony.TelephonyManager",
         "method": "getDeviceId",
         "category": "Identifiers",
         "params": ["int"],
         "hooked_params": {}
     },
     {
-        "class": "android.telephony.TelephoneManager",
+        "class": "android.telephony.TelephonyManager",
         "method": "getSubscriberId",
         "category": "Identifiers",
         "params": [],
         "hooked_params": {}
     },
     {
-        "class": "android.telephony.TelephoneManager",
+        "class": "android.telephony.TelephonyManager",
         "method": "getLine1Number",
         "category": "Identifiers",
         "params": [],
         "hooked_params": {}
     },
     {
-        "class": "android.telephony.TelephoneManager",
+        "class": "android.telephony.TelephonyManager",
         "method": "getNetworkOperator",
         "category": "Identifiers",
         "params": [],
         "hooked_params": {}
     },
     {
-        "class": "android.telephony.TelephoneManager",
+        "class": "android.telephony.TelephonyManager",
         "method": "getNetworkOperatorName",
         "category": "Identifiers",
         "params": [],
@@ -50,70 +50,70 @@
         "hooked_params": {}
     },
     {
-        "class": "android.telephony.TelephoneManager",
+        "class": "android.telephony.TelephonyManager",
         "method": "getSimOperator",
         "category": "Identifiers",
         "params": [],
         "hooked_params": {}
     },
     {
-        "class": "android.telephony.TelephoneManager",
+        "class": "android.telephony.TelephonyManager",
         "method": "getSimOperatorName",
         "category": "Identifiers",
         "params": [],
         "hooked_params": {}
     },
     {
-        "class": "android.telephony.TelephoneManager",
+        "class": "android.telephony.TelephonyManager",
         "method": "getSimCountryIso",
         "category": "Identifiers",
         "params": [],
         "hooked_params": {}
     },
     {
-        "class": "android.telephony.TelephoneManager",
+        "class": "android.telephony.TelephonyManager",
         "method": "getSimSerialNumber",
         "category": "Identifiers",
         "params": [],
         "hooked_params": {}
     },
     {
-        "class": "android.telephony.TelephoneManager",
+        "class": "android.telephony.TelephonyManager",
         "method": "getNetworkCountryIso",
         "category": "Identifiers",
         "params": [],
         "hooked_params": {}
     },
     {
-        "class": "android.telephony.TelephoneManager",
+        "class": "android.telephony.TelephonyManager",
         "method": "getDeviceSoftwareVersion",
         "category": "Identifiers",
         "params": [],
         "hooked_params": {}
     },
     {
-        "class": "android.telephony.TelephoneManager",
+        "class": "android.telephony.TelephonyManager",
         "method": "getImei",
         "category": "Identifiers",
         "params": [],
         "hooked_params": {}
     },
     {
-        "class": "android.telephony.TelephoneManager",
+        "class": "android.telephony.TelephonyManager",
         "method": "getImei",
         "category": "Identifiers",
         "params": ["int"],
         "hooked_params": {}
     },
     {
-        "class": "android.telephony.TelephoneManager",
+        "class": "android.telephony.TelephonyManager",
         "method": "getMeid",
         "category": "Identifiers",
         "params": [],
         "hooked_params": {}
     },
     {
-        "class": "android.telephony.TelephoneManager",
+        "class": "android.telephony.TelephonyManager",
         "method": "getMeid",
         "category": "Identifiers",
         "params": ["int"],
@@ -207,7 +207,7 @@
         "class": "android.content.ContentResolver",
         "method": "query",
         "category": "Application data and storage",
-        "params": ["android.net.Uri", "[Ljava.lang.String", "java.lang.String", "[Ljava.lang.String",
+        "params": ["android.net.Uri", "[Ljava.lang.String;", "java.lang.String", "[Ljava.lang.String;",
           "java.lang.String"],
         "hooked_params": {"URI": 0, "Columns": 1, "Selection": 2, "Selection values": 3}
     },
@@ -215,7 +215,7 @@
         "class": "android.content.ContentResolver",
         "method": "delete",
         "category": "Application data and storage",
-        "params": ["android.net.Uri", "java.lang.String", "[Ljava.lang.String"],
+        "params": ["android.net.Uri", "java.lang.String", "[Ljava.lang.String;"],
         "hooked_params": {"URI": 0, "Selection": 1, "Selection values": 2}
     },
     {
@@ -230,14 +230,14 @@
         "method": "rawQueryWithFactory",
         "category": "Application data and storage",
         "params": ["android.database.sqlite.SQLiteDatabase$CursorFactory", "java.lang.String",
-          "[Ljava.lang.String", "java.lang.String", "android.os.CancellationSignal"],
+          "[Ljava.lang.String;", "java.lang.String", "android.os.CancellationSignal"],
         "hooked_params": {"SQL query": 1, "Selection values": 2}
     },
     {
         "class": "android.database.sqlite.SQLiteDatabase",
         "method": "delete",
         "category": "Application data and storage",
-        "params": ["java.lang.String", "java.lang.String", "[Ljava.lang.String"],
+        "params": ["java.lang.String", "java.lang.String", "[Ljava.lang.String;"],
         "hooked_params": {"Table": 0, "Selection": 1, "Selection values": 2}
     },
     {
@@ -279,7 +279,7 @@
         "class": "dalvik.system.BaseDexClassLoader",
         "method": "$init",
         "category": "Dynamically loaded libraries and files",
-        "params": ["java.lang.String", "java.lang.String", "java.lang.String", "java.lang.ClassLoader"],
+        "params": ["java.lang.String", "java.io.File", "java.lang.String", "java.lang.ClassLoader"],
         "hooked_params": {"Dex file path": 0, "Library path": 2}
     },
     {
@@ -328,14 +328,14 @@
         "class": "android.app.ActivityManager",
         "method": "getRunningTasks",
         "category": "Process administration",
-        "params": [],
+        "params": ["int"],
         "hooked_params": {}
     },
     {
         "class": "android.app.ActivityManager",
         "method": "getRunningServices",
         "category": "Process administration",
-        "params": [],
+        "params": ["int"],
         "hooked_params": {}
     },
     {
@@ -346,7 +346,7 @@
         "hooked_params": {"Package name": 0}
     },
     {
-        "class": "android.app.usage.UsageStatsManager ",
+        "class": "android.app.usage.UsageStatsManager",
         "method": "queryUsageStats",
         "category": "Process administration",
         "params": ["int", "long", "long"],
@@ -364,7 +364,7 @@
         "method": "start",
         "category": "Process administration",
         "params": ["java.lang.String", "java.lang.String", "int", "int", "[I", "int",
-          "int", "[Ljava.lang.String"],
+          "int", "[Ljava.lang.String;"],
         "hooked_params": {"Target class": 0}
     },
     {
@@ -392,15 +392,23 @@
         "class": "android.content.ContextWrapper",
         "method": "startActivities",
         "category": "Intents sent",
-        "params": ["[Landroid.content.Intent"],
+        "params": ["[Landroid.content.Intent;"],
         "hooked_params": {"Description": 0}
     },
     {
         "class": "android.app.Activity",
         "method": "startActivityForResult",
         "category": "Intents sent",
-        "params": ["android.content.Intent"],
+        "params": ["android.content.Intent", "int", "android.os.Bundle"],
         "hooked_params": {"Description": 0}
+    },
+    {
+        "class": "android.app.Activity",
+        "method": "startActivityForResult",
+        "category": "Intents sent",
+        "params": ["java.lang.String", "android.content.Intent", "int",
+          "android.os.Bundle"],
+        "hooked_params": {"Description": 1}
     },
     {
         "class": "android.content.Context",
@@ -651,6 +659,7 @@
     {
         "class": "android.app.AlarmManager",
         "method": "setAlarmClock",
+        "category": "Phone state modification",
         "params": ["android.app.AlarmManager$AlarmClockInfo", "android.app.PendingIntent"],
         "hooked_params": {}
     },
@@ -705,7 +714,7 @@
         "class": "java.lang.reflect.Method",
         "method": "invoke",
         "category": "Reflection calls",
-        "params": ["java.lang.Object", "[Ljava.lang.Object"],
+        "params": ["java.lang.Object", "[Ljava.lang.Object;"],
         "hooked_params": {"Method name": 0}
     },
     {

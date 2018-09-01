@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0e0b0c55-55ea-463c-8909-840fb7942851" name="Default" comment="# fixes round (2)">
-      <change beforePath="$PROJECT_DIR$/test.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" />
+    <list default="true" id="0e0b0c55-55ea-463c-8909-840fb7942851" name="Default" comment="#">
+      <change afterPath="$PROJECT_DIR$/modules/analysing/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/api/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/api/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/definitions/constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/definitions/constants.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/analysis/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/definitions/classes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/analysis_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/analysis_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/connection/adb.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/connection/adb.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/connection/droidbot.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/connection/droidbot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/monitoring/api_mon.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/monitoring/api_mon.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/monitoring/tcpdump.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/monitoring/net_mon.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/startup.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/startup.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/hooking/hooks_def.json" beforeDir="false" afterPath="$PROJECT_DIR$/utils/hooking/hooks_def.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -40,7 +51,7 @@
     <session id="-179635242">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="8" />
+          <entry key="project.closed" value="9" />
           <entry key="project.open.time.10" value="1" />
           <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.12" value="1" />
@@ -50,20 +61,22 @@
           <entry key="project.open.time.16" value="3" />
           <entry key="project.open.time.17" value="2" />
           <entry key="project.open.time.18" value="1" />
+          <entry key="project.open.time.19" value="1" />
           <entry key="project.open.time.2" value="1" />
+          <entry key="project.open.time.23" value="1" />
           <entry key="project.open.time.8" value="1" />
-          <entry key="project.opened" value="25" />
+          <entry key="project.opened" value="27" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="dummy" value="38" />
+          <entry key="dummy" value="62" />
           <entry key="gitignore" value="29" />
           <entry key="html" value="17" />
-          <entry key="js" value="1687" />
-          <entry key="json" value="7772" />
-          <entry key="md" value="53" />
-          <entry key="py" value="25726" />
+          <entry key="js" value="1731" />
+          <entry key="json" value="7865" />
+          <entry key="md" value="65" />
+          <entry key="py" value="29313" />
           <entry key="sh" value="185" />
           <entry key="txt" value="312" />
         </counts>
@@ -72,75 +85,76 @@
         <counts>
           <entry key="Bash" value="185" />
           <entry key="HTML" value="17" />
-          <entry key="JSON" value="7772" />
-          <entry key="JavaScript" value="1687" />
-          <entry key="Markdown" value="53" />
-          <entry key="PLAIN_TEXT" value="379" />
-          <entry key="Python" value="25726" />
+          <entry key="JSON" value="7865" />
+          <entry key="JavaScript" value="1731" />
+          <entry key="Markdown" value="65" />
+          <entry key="PLAIN_TEXT" value="403" />
+          <entry key="Python" value="29313" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="LICENSE" value="3" />
-          <entry key="gitignore" value="5" />
+          <entry key="gitignore" value="7" />
           <entry key="html" value="1" />
-          <entry key="js" value="28" />
-          <entry key="json" value="26" />
-          <entry key="md" value="4" />
-          <entry key="py" value="241" />
+          <entry key="js" value="34" />
+          <entry key="json" value="33" />
+          <entry key="md" value="6" />
+          <entry key="py" value="285" />
           <entry key="sh" value="9" />
-          <entry key="txt" value="13" />
+          <entry key="txt" value="14" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Bash" value="8" />
           <entry key="HTML" value="1" />
-          <entry key="JSON" value="26" />
-          <entry key="JavaScript" value="28" />
-          <entry key="Markdown" value="4" />
-          <entry key="PLAIN_TEXT" value="22" />
-          <entry key="Python" value="241" />
+          <entry key="JSON" value="33" />
+          <entry key="JavaScript" value="34" />
+          <entry key="Markdown" value="6" />
+          <entry key="PLAIN_TEXT" value="25" />
+          <entry key="Python" value="285" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="331" selection-start-line="331" selection-end-line="331" />
+              <folding>
+                <element signature="e#1414#1423#0" expanded="true" />
+                <marker date="1535807421840" expanded="true" signature="404:411" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test.js">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modules/monitoring/api_mon.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="205">
+              <caret line="69" column="74" lean-forward="true" selection-start-line="69" selection-start-column="74" selection-end-line="69" selection-end-column="74" />
+              <folding>
+                <element signature="e#275#284#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/modules/startup.py">
+        <entry file="file://$PROJECT_DIR$/utils/hooking/hooks_def.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="13" column="31" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
-              <folding>
-                <marker date="1534857011069" expanded="true" signature="3513:3515" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/monitoring/tcpdump.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="346">
-              <caret line="45" selection-start-line="45" selection-end-line="45" />
-              <folding>
-                <element signature="e#275#289#0" expanded="true" />
-                <marker date="1534859843004" expanded="true" signature="734:871" ph="..." />
-                <marker date="1534859843004" expanded="true" signature="887:1297" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/xendroid.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="750">
-              <caret line="50" column="20" selection-start-line="50" selection-start-column="20" selection-end-line="50" selection-end-column="20" />
-              <folding>
-                <element signature="e#298#313#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="6135">
+              <caret line="409" column="10" selection-start-line="409" selection-start-column="10" selection-end-line="409" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -151,22 +165,13 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
-        <option value="Python Script" />
         <option value="JavaScript File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>activityman</find>
-      <find>binder</find>
-      <find>activitythre</find>
-      <find>broadcast</find>
-      <find>cryp</find>
-      <find>telephony</find>
-      <find>exec</find>
-      <find>content</find>
-      <find>class_</find>
       <find>runtime</find>
       <find>generic</find>
       <find>sms</find>
@@ -188,6 +193,15 @@
       <find>version_lib</find>
       <find>you can</find>
       <find>push</find>
+      <find>category</find>
+      <find>decode</find>
+      <find>update</find>
+      <find>Manager</find>
+      <find>[L</find>
+      <find>delete</find>
+      <find>init</find>
+      <find>start&quot;</find>
+      <find>startActivityFor</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -196,10 +210,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/prepare_device.py" />
-        <option value="$PROJECT_DIR$/modules/exceptions.py" />
-        <option value="$PROJECT_DIR$/scripts/test.js" />
-        <option value="$PROJECT_DIR$/modules/abstract.py" />
         <option value="$PROJECT_DIR$/frida_scripts/test.js" />
         <option value="$PROJECT_DIR$/frida_scripts/frida.json" />
         <option value="$PROJECT_DIR$/frida_scripts/frida.js" />
@@ -225,28 +235,32 @@
         <option value="$PROJECT_DIR$/startup.py" />
         <option value="$PROJECT_DIR$/modules/definitions/abstract.py" />
         <option value="$PROJECT_DIR$/modules/analysis/api_mon.py" />
-        <option value="$PROJECT_DIR$/utils/hooking/hooks_def.json" />
         <option value="$PROJECT_DIR$/modules/adapter/adb.py" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/script.sh" />
         <option value="$PROJECT_DIR$/requirements.txt" />
         <option value="$PROJECT_DIR$/test.sh" />
         <option value="$PROJECT_DIR$/modules/connection/qweq.html" />
         <option value="$PROJECT_DIR$/modules/connection/tcpdump.py" />
         <option value="$PROJECT_DIR$/modules/api/utils.py" />
-        <option value="$PROJECT_DIR$/modules/connection/droidbot.py" />
         <option value="$PROJECT_DIR$/modules/definitions/constants.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/modules/definitions/exceptions.py" />
-        <option value="$PROJECT_DIR$/modules/analysis_manager.py" />
-        <option value="$PROJECT_DIR$/modules/startup.py" />
-        <option value="$PROJECT_DIR$/modules/monitoring/api_mon.py" />
         <option value="$PROJECT_DIR$/modules/monitoring/tcpdump.py" />
         <option value="$PROJECT_DIR$/xendroid.py" />
-        <option value="$PROJECT_DIR$/modules/connection/adb.py" />
         <option value="$PROJECT_DIR$/lib/api/utils.py" />
-        <option value="$PROJECT_DIR$/test.py" />
+        <option value="$PROJECT_DIR$/modules/connection/droidbot.py" />
+        <option value="$PROJECT_DIR$/lib/definitions/classes.py" />
+        <option value="$PROJECT_DIR$/lib/definitions/constants.py" />
+        <option value="$PROJECT_DIR$/modules/monitoring/net_mon.py" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/modules/connection/adb.py" />
+        <option value="$PROJECT_DIR$/modules/analysis_manager.py" />
+        <option value="$PROJECT_DIR$/lib/definitions/exceptions.py" />
+        <option value="$PROJECT_DIR$/modules/startup.py" />
         <option value="$PROJECT_DIR$/test.js" />
+        <option value="$PROJECT_DIR$/test.py" />
+        <option value="$PROJECT_DIR$/modules/monitoring/api_mon.py" />
+        <option value="$PROJECT_DIR$/utils/hooking/hooks_def.json" />
       </list>
     </option>
   </component>
@@ -268,7 +282,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -286,6 +299,12 @@
               <item name="Xendroid" type="462c0819:PsiDirectoryNode" />
               <item name="lib" type="462c0819:PsiDirectoryNode" />
               <item name="api" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="XenDroid" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Xendroid" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+              <item name="definitions" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="XenDroid" type="b2602c69:ProjectViewProjectNode" />
@@ -309,16 +328,23 @@
               <item name="Xendroid" type="462c0819:PsiDirectoryNode" />
               <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="XenDroid" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Xendroid" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
+              <item name="hooking" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/cuckoo_test" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
@@ -521,7 +547,14 @@
       <option name="project" value="LOCAL" />
       <updated>1534860343747</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="#">
+      <created>1534860530896</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1534860530896</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -537,7 +570,7 @@
     <frame x="67" y="25" width="1299" height="743" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4976852" visible="true" weight="0.2801277" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4976852" visible="true" weight="0.2897047" />
       <window_info id="Structure" order="1" sideWeight="0.5023148" side_tool="true" weight="0.23505977" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -546,25 +579,61 @@
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3990964" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" visible="true" weight="0.23491028" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49720672" weight="0.23491028" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32919255" />
+      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49960095" weight="0.32626426" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49561054" weight="0.365416" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49561054" weight="0.4502447" />
       <window_info anchor="bottom" id="Python Console" order="11" weight="0.32817337" />
-      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.50438946" side_tool="true" weight="0.16313213" />
+      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.50039905" side_tool="true" weight="0.32789558" />
       <window_info anchor="bottom" id="Concurrent Activities Diagram" order="13" weight="0.32919255" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" weight="0.32988048" />
-      <window_info anchor="right" id="R Graphics" order="4" />
-      <window_info anchor="right" id="R Packages" order="5" />
-      <window_info anchor="right" id="Database" order="6" weight="0.32960895" />
+      <window_info anchor="right" id="R Graphics" order="3" />
+      <window_info anchor="right" id="R Packages" order="4" />
+      <window_info anchor="right" id="Database" order="5" weight="0.32960895" />
+      <window_info anchor="right" id="SciView" order="6" weight="0.32960895" />
     </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4976852" visible="true" weight="0.2897047" />
+      <window_info id="Structure" order="1" sideWeight="0.5023148" side_tool="true" weight="0.23505977" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32626426" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49961567" weight="0.2872671" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3990964" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49720672" weight="0.23491028" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49960095" weight="0.32626426" />
+      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49561054" visible="true" weight="0.365416" />
+      <window_info anchor="bottom" id="Python Console" order="11" weight="0.32817337" />
+      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.50039905" side_tool="true" weight="0.32789558" />
+      <window_info anchor="bottom" id="Concurrent Activities Diagram" order="13" weight="0.32919255" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="R Graphics" order="3" />
+      <window_info anchor="right" id="R Packages" order="4" />
+      <window_info anchor="right" id="Database" order="5" weight="0.32960895" />
+      <window_info anchor="right" id="SciView" order="6" weight="0.32960895" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -577,11 +646,11 @@
     <MESSAGE value="# apply fixes for the whole project" />
     <MESSAGE value="# cross-compiled tcpdump for network monitoring" />
     <MESSAGE value="# update .gitignore" />
-    <MESSAGE value="#" />
     <MESSAGE value="# add useful runtime methods to the class" />
     <MESSAGE value="# add module for monitoring network traffic with tcpdump" />
     <MESSAGE value="# fixes round (2)" />
-    <option name="LAST_COMMIT_MESSAGE" value="# fixes round (2)" />
+    <MESSAGE value="#" />
+    <option name="LAST_COMMIT_MESSAGE" value="#" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/init.sh" />
@@ -629,21 +698,47 @@
     <entry file="file://$PROJECT_DIR$/modules/connection/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="90">
-            <caret line="6" column="40" lean-forward="true" selection-start-line="6" selection-end-line="7" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/script.sh" />
     <entry file="file://$PROJECT_DIR$/test.sh" />
     <entry file="file://$PROJECT_DIR$/modules/connection/qweq.html" />
     <entry file="file://$PROJECT_DIR$/LICENSE">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/definitions/constants.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="46" lean-forward="true" selection-start-line="18" selection-start-column="46" selection-end-line="18" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/definitions/classes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+          <folding>
+            <marker date="1535641279149" expanded="true" signature="306:307" ph="..." />
+            <marker date="1535641279149" expanded="true" signature="331:390" ph="..." />
+            <marker date="1535641279149" expanded="true" signature="485:490" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reqs.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="18" lean-forward="true" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="105">
+            <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
@@ -652,115 +747,120 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/hooking/hooks_def.json">
+    <entry file="file://$PROJECT_DIR$/lib/api/utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11970">
-          <caret line="798" column="35" lean-forward="true" selection-start-line="798" selection-start-column="35" selection-end-line="798" selection-end-column="35" />
+        <state relative-caret-position="1095">
+          <caret line="73" selection-start-line="73" selection-end-line="73" />
+          <folding>
+            <element signature="e#274#283#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/definitions/exceptions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        <state relative-caret-position="396">
+          <caret line="36" column="8" lean-forward="true" selection-start-line="36" selection-start-column="8" selection-end-line="36" selection-end-column="8" />
           <folding>
-            <element signature="e#275#291#0" expanded="true" />
+            <marker date="1535711691960" expanded="true" signature="997:1000" ph="..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/reqs.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="25" lean-forward="true" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/definitions/constants.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/api/utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="31" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/connection/droidbot.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="63" selection-start-line="18" selection-start-column="63" selection-end-line="18" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/connection/adb.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="197" selection-start-line="197" selection-end-line="197" />
-          <folding>
-            <element signature="e#275#292#0" expanded="true" />
-            <marker date="1534860201539" expanded="true" signature="6594:6852" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/monitoring/api_mon.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/xendroid.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="750">
-          <caret line="50" column="20" selection-start-line="50" selection-start-column="20" selection-end-line="50" selection-end-column="20" />
+        <state relative-caret-position="19">
+          <caret line="7" column="54" lean-forward="true" selection-start-line="7" selection-start-column="54" selection-end-line="7" selection-end-column="54" />
           <folding>
             <element signature="e#298#313#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modules/analysis_manager.py">
+    <entry file="file://$PROJECT_DIR$/modules/startup.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="30" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/monitoring/tcpdump.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="346">
-          <caret line="45" selection-start-line="45" selection-end-line="45" />
+        <state relative-caret-position="270">
+          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
           <folding>
-            <element signature="e#275#289#0" expanded="true" />
-            <marker date="1534859843004" expanded="true" signature="734:871" ph="..." />
-            <marker date="1534859843004" expanded="true" signature="887:1297" ph="..." />
+            <element signature="e#275#284#0" expanded="true" />
+            <marker date="1535796210957" expanded="true" signature="3529:3531" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test.py">
+    <entry file="file://$USER_HOME$/.local/lib/python2.7/site-packages/frida/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
-          <caret line="32" selection-start-line="32" selection-end-line="32" />
+        <state relative-caret-position="441">
+          <caret line="126" column="56" selection-start-line="126" selection-start-column="56" selection-end-line="126" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/connection/droidbot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="1" lean-forward="true" selection-start-line="2" selection-start-column="1" selection-end-line="2" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/analysis_manager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="52" column="54" lean-forward="true" selection-start-line="52" selection-start-column="54" selection-end-line="52" selection-end-column="54" />
+          <folding>
+            <element signature="e#275#284#0" expanded="true" />
+            <marker date="1535711695484" expanded="true" signature="1397:1529" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/connection/adb.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="720">
+          <caret line="48" column="8" lean-forward="true" selection-start-line="48" selection-start-column="8" selection-end-line="48" selection-end-column="8" />
+          <folding>
+            <element signature="e#275#289#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/monitoring/net_mon.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1020">
+          <caret line="68" lean-forward="true" selection-start-line="68" selection-end-line="68" />
+          <folding>
+            <element signature="e#275#284#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/modules/startup.py">
+    <entry file="file://$PROJECT_DIR$/test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="31" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
+        <state relative-caret-position="180">
+          <caret line="331" selection-start-line="331" selection-end-line="331" />
           <folding>
-            <marker date="1534857011069" expanded="true" signature="3513:3515" ph="..." />
+            <element signature="e#1414#1423#0" expanded="true" />
+            <marker date="1535807421840" expanded="true" signature="404:411" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/monitoring/api_mon.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="205">
+          <caret line="69" column="74" lean-forward="true" selection-start-line="69" selection-start-column="74" selection-end-line="69" selection-end-column="74" />
+          <folding>
+            <element signature="e#275#284#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/hooking/hooks_def.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6135">
+          <caret line="409" column="10" selection-start-line="409" selection-start-column="10" selection-end-line="409" selection-end-column="10" />
         </state>
       </provider>
     </entry>
