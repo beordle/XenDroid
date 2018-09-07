@@ -29,7 +29,15 @@ class XenDroidDependencyError(Exception):
         Exception.__init__(self, msg)
 
 
-class XenDroidConnectionError(Exception):
+class XenDroidCommunicationError(Exception):
+    pass
+
+
+class XenDroidADBError(XenDroidCommunicationError):
+    pass
+
+
+class XenDroidFridaError(XenDroidCommunicationError):
     pass
 
 
