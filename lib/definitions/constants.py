@@ -12,8 +12,8 @@ XENDROID_TIMEOUT = 120
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-ANALYSES_DIR = os.path.abspath(os.path.join(ROOT_DIR, 'xendroid_storage', 'analyses'))
+ANALYSES_DIR = os.path.join(ROOT_DIR, 'xendroid_storage', 'analyses')
 
-MISC_FOLDER = os.path.abspath(os.path.join(ROOT_DIR, 'xendroid_storage', 'misc'))
+MISC_FOLDER = os.path.join(ROOT_DIR, 'xendroid_storage', 'misc')
 
-UTILS_FOLDER = os.path.abspath(os.path.join(ROOT_DIR, 'utils'))
+UTILS_FOLDER = os.path.join(ROOT_DIR, 'utils')
