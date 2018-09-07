@@ -5,11 +5,12 @@
 # This program is a free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License
 
-
-import ntpath
-import subprocess
 import os
+import ntpath
+import random
+import string
 import requests
+import subprocess
 
 from lib.definitions.exceptions import XenDroidDependencyError
 
@@ -72,3 +73,33 @@ def get_filename_from_path(path):
     """
     dirpath, filename = ntpath.split(path)
     return filename if filename else ntpath.basename(dirpath)
+
+
+def get_rand_str(length, content=None):
+    """
+    generate a random string with specified length and content
+    :param length:
+    :param content: If left blank returns a string of digits
+    :return:
+    """
+    if content is None:
+        content = ['digits']
+
+    chars = str()
+    for type_ in content:
+        if type_ == 'hex':
+            chars += 'ABCDEF'
+        else:
+            chars += getattr(string, type_, None)
+    return \
+        ''.join(random.choice(chars) for _ in range(length))
+
+
+def get_rand_mac_addr():
+    """
+    generate a random mac address
+    :return:
+    """
+    mac = get_rand_str(12, ['digits', 'hex'])
+    pretty_mac = ':'.join(map(''.join, zip(*[iter(mac)]*2)))
+    return pretty_mac
