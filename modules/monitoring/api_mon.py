@@ -6,20 +6,25 @@
 # it under the terms of the GNU General Public License
 
 
-import frida
-import logging
 import os
-import json
 import re
+import json
+import logging
 
 from lib.definitions.constants import ROOT_DIR
+from lib.definitions.classes import MonitoringModule
+
+from lib.definitions.exceptions import (
+    XenDroidFridaError, XenDroidModuleError
+)
 
 
 class ScriptFactory(object):
-
     """
-    This class generates the scripts that frida injects for API instrumentation
+    This class generates the JavaScript scripts that frida injects
+    for Android Java API instrumentation
     """
+    values_module = __import__('lib.definitions.values', fromlist=['*'])
 
     def __init__(self, hook_def):
 
@@ -32,34 +37,33 @@ class ScriptFactory(object):
         self.hooked_params = hook_def['hooked_params']
         self.hook_category = hook_def['category']
 
-        self.method_params = ','.join(['param{}'.format(x) for x in range(len(self.method_params_types))])
+        self.method_params = ', '.join(
+            ['param{}'.format(x) for x in range(len(self.method_params_types))]
+        )
 
-    def __get_hook_code(self, _hook_handler=str(), loaded_classes=str(), return_val=None):
-
+    def __get_hook_code(self, _hook_handler=str(), used_classes=str(), return_capture=None):
         base_hook_code = \
-            """
-            // This script is generated from XenDroid `https://www.github.com/muhzii/XenDroid`
-            
-            // Load the hook into the JVM
-            Java.perform(function() {
-                const Arrays = Java.use("java.util.Arrays");
-                const String = Java.use("java.lang.String");
-                const hook_cls = Java.use("%s");
-                %s
-                hook_cls.%s.overload(%s).implementation = function (%s) {
-                    var hookData = {
-                        "Category" : "%s",
-                        "Class" : "%s",
-                        "Method" : "%s"
-                    };
+                """
+                try {
+                    const hook_cls = Java.use("%s");
                     %s
-                    send(JSON.stringify(hookData));
-                    return %s;
-                };
-            });
-            """
+                    // Load the hook
+                    hook_cls.%s.overload(%s).implementation = function (%s) {
+                        var hookData = {
+                            "Category" : "%s",
+                            "Class" : "%s",
+                            "Method" : "%s"
+                        };
+                        %s
+                        send(JSON.stringify(hookData));
+                        var ret_val;
+                        %s
+                        return ret_val;
+                    };
+                } catch(e) { setTimeout(function() { throw e; }, 0); }
+                """
 
-        overload_args = ','.join(['"{}"'.format(x) for x in self.method_params_types])
+        overload_args = ', '.join(['"{}"'.format(x) for x in self.method_params_types])
 
         for param_name in self.hooked_params:
 
@@ -77,36 +81,46 @@ class ScriptFactory(object):
 
             _hook_handler += tmp.format(param_name, param_num)
 
-        if return_val is None:
-            return_val = 'this.%s(%s)' % (self.method_name, self.method_params)
+        if return_capture is None:
+            return_capture = 'ret_val = this.%s(%s);' % (self.method_name, self.method_params)
 
-        return base_hook_code % (self.cls_name, loaded_classes, self.method_name, overload_args,
-                                 self.method_params, self.hook_category, self.cls_name,
-                                 self.method_name, _hook_handler, return_val)
+        return base_hook_code % (self.cls_name, used_classes, self.method_name,
+                                 overload_args, self.method_params, self.hook_category,
+                                 self.cls_name, self.method_name, _hook_handler,
+                                 return_capture)
 
-    def __get_hook_code_for_android_telephony_TelephoneManager(self):
-
+    def _get_hook_code_for_android_telephony_TelephonyManager(self):
         if self.method_name.startswith('get'):
-            return_val = 'this.%s(%s).split("").sort(function(){return 0.5-Math.random()}).join("")' % \
-                         (self.method_name, self.method_params)
-            return self.__get_hook_code(return_val=return_val)
+            mock_val = getattr(
+                self.values_module, 'MOCK_TM_' + self.method_name[3:].upper(), str()
+            )
+            return self.__get_hook_code(
+                return_capture='ret_val = String.$new("%s");' % mock_val
+            )
         else:
             return self.__get_hook_code()
 
-    def __get_hook_code_for_android_app_SharedPreferencesImpl(self):
+    def _get_hook_code_for_android_net_wifi_WifiInfo(self):
+        if self.method_name == 'getMacAddress':
+            mock_val = getattr(self.values_module, 'MOCK_WIFI_MACADDRESS', str())
+            return self.__get_hook_code(
+                return_capture='ret_val = String.$new("%s");' % mock_val
+            )
+        else:
+            return self.__get_hook_code()
 
-        loaded_classes = 'const file_cls = Java.use(java.io.File");'
+    def _get_hook_code_for_android_app_SharedPreferencesImpl(self):
+        used_classes = 'const file_cls = Java.use("java.io.File");'
 
         _hook_handler = \
             """
             var file_instance = Java.cast(this.mFile.value, file_cls);
             hookData["Target file"] = file_instance.getAbsolutePath();
             """
-        return self.__get_hook_code(_hook_handler, loaded_classes)
+        return self.__get_hook_code(_hook_handler, used_classes)
 
-    def __get_hook_code_for_android_app_SharedPreferencesImpl_EditorImpl(self):
-
-        loaded_classes = \
+    def _get_hook_code_for_android_app_SharedPreferencesImpl_EditorImpl(self):
+        used_classes = \
             """
             const pref_cls = Java.use("android.app.SharedPreferencesImpl");
             const file_cls = Java.use("java.io.File");
@@ -119,10 +133,9 @@ class ScriptFactory(object):
             
             hookData["Target file"] = file_instance.getAbsolutePath();
             """
-        return self.__get_hook_code(_hook_handler, loaded_classes)
+        return self.__get_hook_code(_hook_handler, used_classes)
 
-    def __get_hook_code_for_android_content_ContentResolver(self):
-
+    def _get_hook_code_for_android_content_ContentResolver(self):
         if self.method_name.startswith('insert'):
             _hook_handler = \
                 """
@@ -132,9 +145,10 @@ class ScriptFactory(object):
                 for(i = 0; i < keys.size(); i++){
                     var aKey = keys.iterator().next();
                     
-                    hookData["Content values"].push(
-                        {"Key": aKey.toString(), "Value": param1.get(aKey).toString()}
-                    );
+                    hookData["Content values"].push({
+                        "Key": aKey.toString(),
+                        "Value": param1.get(aKey).toString()
+                    });
                 }
                 """
             return self.__get_hook_code(_hook_handler)
@@ -142,8 +156,7 @@ class ScriptFactory(object):
         else:
             return self.__get_hook_code()
 
-    def __get_hook_code_for_android_database_sqlite_SQLiteDatabase(self):
-
+    def _get_hook_code_for_android_database_sqlite_SQLiteDatabase(self):
         _hook_handler = 'hookData["Target file"] = this.getPath();'
 
         if self.method_name.startswith('insert'):
@@ -155,15 +168,15 @@ class ScriptFactory(object):
                 for(i = 0; i < keys.size(); i++){
                     var aKey = keys.iterator().next();
     
-                    hookData["Content values"].push(
-                        {"Column": aKey.toString(), "Value": param2.get(aKey).toString()}
-                    );
+                    hookData["Content values"].push({
+                        "Column": aKey.toString(), 
+                        "Value": param2.get(aKey).toString()
+                    });
                 }
                 """
         return self.__get_hook_code(_hook_handler)
 
-    def __get_hook_code_for_android_content_Context(self):
-
+    def _get_hook_code_for_android_content_Context(self):
         if self.method_name == 'registerReceiver':
             _hook_handler = 'hookData["Action"] = param1.getAction();'
             return self.__get_hook_code(_hook_handler)
@@ -171,8 +184,7 @@ class ScriptFactory(object):
         else:
             return self.__get_hook_code()
 
-    def __get_hook_code_for_java_lang_ProcessBuilder(self):
-
+    def _get_hook_code_for_java_lang_ProcessBuilder(self):
         if self.method_name == 'start':
             _hook_handler = \
                 """
@@ -185,83 +197,127 @@ class ScriptFactory(object):
         else:
             return self.__get_hook_code()
 
-    def get_script(self):
+    @staticmethod
+    def wrap_hook_code(hook_code):
+        return \
+            """
+            // This script is generated from XenDroid `https://www.github.com/muhzii/XenDroid`
 
-        gen_name = "__get_hook_code_for_{}".format(re.sub('[.$]', '_', self.cls_name))
+            // Attach to the vm
+            Java.perform(function() {
+                const Arrays = Java.use("java.util.Arrays");
+                const String = Java.use("java.lang.String");
+                %s
+            });
+            """ % hook_code
+
+    def get_script(self, wrap=True):
+        gen_name = "_get_hook_code_for_{}".format(re.sub('[.$]', '_', self.cls_name))
         gen_func = getattr(self, gen_name, None)
 
         if gen_func is None:
-            return self.__get_hook_code()
+            script = self.__get_hook_code()
         else:
-            return gen_func()
+            script = gen_func()
+
+        if wrap:
+            return self.wrap_hook_code(script)
+        else:
+            return script
 
 
-class APIMonitor(object):
+class APIMonitor(MonitoringModule):
 
-    def __init__(self, package_name, device_serial, analysis_path):
+    def __init__(self, analysis_path, frida_connection):
+
+        MonitoringModule.__init__(self, analysis_path, 'API Monitoring')
 
         self.logger = logging.getLogger(self.__class__.__name__)
+        self.frida_connection = frida_connection
 
-        self.package_name = package_name
-        self.device_serial = device_serial
-        self.analysis_path = analysis_path
-
-        self.logs_file = os.path.join(analysis_path, 'logs', 'frida_logs.log')
-        self.errors_file = os.path.join(analysis_path, 'logs', 'frida_errors_logs.log')
-
-        self.hooks_file = os.path.join(ROOT_DIR, 'utils', 'hooking', 'hooks_def.json')
+        self.logs_path = os.path.join(
+            self.analysis_path, 'logs', 'frida_logs.log'
+        )
+        self.err_logs_path = os.path.join(
+            self.analysis_path, 'logs', 'frida_errors_logs.log'
+        )
+        self.hooks_file = os.path.join(
+            ROOT_DIR, 'utils', 'hooking', 'hooks_def.json'
+        )
 
         self.logs_dumper = None
         self.errors_dumper = None
-        self.init_dumping()
+        self._init_dumping()
 
-    def init_dumping(self):
-
-        os.makedirs(os.path.dirname(self.logs_file))
-
+    def _init_dumping(self):
         # initialize the logging to dump logs to a file that will contain the hooking logs
-        self.logs_dumper = logging.getLogger()
-        self.errors_dumper = logging.getLogger()
+
+        self.logs_dumper = logging.getLogger('FRIDA_MESSAGE')
+        self.errors_dumper = logging.getLogger('FRIDA_ERROR')
 
         self.errors_dumper.setLevel(logging.DEBUG)
         self.logs_dumper.setLevel(logging.DEBUG)
 
-        logs_fh = logging.FileHandler(self.logs_file)
-        logs_fh.setLevel(logging.DEBUG)
+        logs_fh = logging.FileHandler(self.logs_path)
+        logs_fh.setLevel(logging.INFO)
 
-        errors_fh = logging.FileHandler(self.errors_file)
-        errors_fh.setLevel(logging.DEBUG)
+        errors_fh = logging.FileHandler(self.err_logs_path)
+        errors_fh.setLevel(logging.INFO)
 
         self.logs_dumper.addHandler(logs_fh)
         self.errors_dumper.addHandler(errors_fh)
 
-    def __log_script_messages(self, message, payload):
+        self.logs_dumper.propagate = False
+        self.errors_dumper.propagate = False
 
+    def __log_script_messages(self, message, payload):
         if message['type'] == 'send':
             if 'payload' in message:
-                self.logs_dumper.debug(payload)
+                self.logs_dumper.info(payload)
         elif message['type'] == 'error':
-            self.errors_dumper.debug(message)
+            self.errors_dumper.info(message)
 
     def start(self):
-
-        # first: attach to the process
-        session = frida.get_device_manager().get_device(self.device_serial).attach(self.package_name)
+        """
+        start monitoring android api calls
+        :return:
+        """
+        super(APIMonitor, self).start()
 
         # load the file that contains the scripts definitions
         hooks_def = json.load(open(self.hooks_file, 'r'))
 
+        hook_script_jvm = str()
         # loop through all the hooks in the json file
         for hook in hooks_def:
-
             script_gen = ScriptFactory(hook)
+            hook_script_jvm += script_gen.get_script(wrap=False)
 
+        hook_script_jvm = ScriptFactory.wrap_hook_code(hook_script_jvm)
+
+        self.frida_connection.set_msg_handler(self.__log_script_messages)
+        try:
+            # attach to the process
+            self.frida_connection.start_session()
             # load the script into the device
-            script = session.create_script(script_gen.get_script())
-            script.on('message', self.__log_script_messages)
-            script.load()
+            self.frida_connection.load_script(hook_script_jvm)
+        except XenDroidFridaError as e:
+            self.logger.error(e.message)
+            raise XenDroidModuleError()
 
-        self.logger.debug('successfully started the process monitoring module ...')
+        self.pid = self.frida_connection.pid
+        self.logger.debug(
+            'successfully started the API monitoring module...'
+        )
 
     def stop(self):
-        pass
+        """
+        stop the monitoring process
+        :return:
+        """
+        super(APIMonitor, self).stop()
+
+        self.frida_connection.terminate_session()
+        self.logger.debug(
+            'API monitoring module successfully terminated!'
+        )
