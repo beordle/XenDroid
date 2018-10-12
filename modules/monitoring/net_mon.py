@@ -10,7 +10,10 @@ import os
 import logging
 
 from lib.definitions.classes import MonitoringModule
-from lib.definitions.exceptions import XenDroidCommunicationError
+
+from lib.definitions.exceptions import (
+    XenDroidADBError, XenDroidModuleError
+)
 
 
 class TrafficMonitor(MonitoringModule):
@@ -19,7 +22,7 @@ class TrafficMonitor(MonitoringModule):
 
     def __init__(self, analysis_path, adb_connection):
 
-        MonitoringModule.__init__(self, analysis_path)
+        MonitoringModule.__init__(self, analysis_path, 'Network monitoring')
 
         self.logger = logging.getLogger(self.__class__.__name__)
         self.adb_connection = adb_connection
@@ -30,7 +33,6 @@ class TrafficMonitor(MonitoringModule):
         self.t_log = self.t_executable + '.log'
 
     def pull_output(self):
-
         """
         Pull the tcpdump traffic output files from the device
         :return:
@@ -42,11 +44,11 @@ class TrafficMonitor(MonitoringModule):
         self.adb_connection.pull(self.t_log, pull_to)
 
     def start(self):
-
         """
         Start tcpdump traffic monitoring on the device
         :return: process id
         """
+        super(TrafficMonitor, self).start()
 
         # save a pcap file to the target directory
         args = [self.t_executable, '-w', self.t_dump, '&']
@@ -54,28 +56,27 @@ class TrafficMonitor(MonitoringModule):
 
         try:
             self.adb_connection.shell(args)
-        except XenDroidCommunicationError:
-            self.logger.error('Failed to start network monitoring module, '
-                              'some error occurred with tcpdump...')
-            return
+        except XenDroidADBError:
+            raise XenDroidModuleError()
 
-        self._running = True
         self.pid = self.adb_connection.shell('echo $!')
         self.logger.debug('Network monitoring module started successfully!')
 
     def stop(self):
-
         """
         Stop the tcpdump process and pull the logs
         :return:
         """
         if self.isRunning():
-            self.logger.debug('Exiting network monitoring...')
+            self.logger.debug('Stopping the network sniffer...')
             self.adb_connection.kill_process(self.pid)
 
             args = [self.t_executable, '-ttttnnql', '-r', self.t_dump, '>', self.t_log]
-            self.adb_connection.shell(args)
+            try:
+                self.adb_connection.shell(args)
+            except XenDroidADBError:
+                raise XenDroidModuleError()
 
             self.pull_output()
-            self._running = False
+            super(TrafficMonitor, self).stop()
             self.logger.debug('Network monitoring process has been killed!')
