@@ -6,22 +6,23 @@
 # it under the terms of the GNU General Public License
 
 import os
+import lzma
 import ntpath
 import random
 import string
+import signal
 import requests
 import subprocess
 
-from lib.definitions.exceptions import XenDroidDependencyError
+from lib.definitions.exceptions import (
+    XenDroidDependencyError,
+    XenDroidTimeOutError
+)
 
-try:
-    import backports.lzma
-except ImportError as e:
-    raise XenDroidDependencyError(e)
+from lib.definitions.constants import XENDROID_TIMEOUT
 
 
 def get_package_name(path_to_apk):
-
     """
     Get the package name from an apk file
     :param path_to_apk: Path to the apk file
@@ -38,7 +39,6 @@ def get_package_name(path_to_apk):
 
 
 def download_and_extract_archive_from_url(url, t_path):
-
     """
     download archive from url, extract it then return the data
     :param url:
@@ -57,7 +57,7 @@ def download_and_extract_archive_from_url(url, t_path):
                 fh.write(chunk)
 
         # Extracting data from the archive
-        with backports.lzma.open(t_path) as fh:
+        with lzma.open(t_path) as fh:
             data = fh.read()
 
         os.unlink(t_path)
@@ -98,8 +98,29 @@ def get_rand_str(length, content=None):
 def get_rand_mac_addr():
     """
     generate a random mac address
-    :return:
+    :return: 12 character string mac address
     """
     mac = get_rand_str(12, ['digits', 'hex'])
     pretty_mac = ':'.join(map(''.join, zip(*[iter(mac)]*2)))
     return pretty_mac
+
+
+def with_timeout(f):
+    """
+    A decorator for timeout-sensitive methods
+    :return:
+    """
+    def handler(sig, frame):
+        raise XenDroidTimeOutError()
+
+    def wrapper(*args, **kwargs):
+
+        signal.signal(signal.SIGALRM, handler)
+        signal.alarm(XENDROID_TIMEOUT)
+
+        ret = f(*args, **kwargs)
+
+        signal.alarm(0)
+        return ret
+
+    return wrapper
