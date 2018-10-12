@@ -104,6 +104,8 @@ class AnalysisManager(object):
         # start loading the monitoring modules
         self.load_monitoring()
 
+        self.frida_connection.resume_app()
+
         # interact with the device using DroidBot
         DroidBot().interact()
 
