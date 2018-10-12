@@ -63,11 +63,6 @@ class Frida(object):
             self.spawn_app(self.pkg)
             return
 
-        # this is not applying early instrumentation for the application
-        # due to some crashing problems with frida early injection
-        # track this issue at: https://github.com/frida/frida-java/issues/29
-        # self.resume_app()
-
         self.logger.debug('Spawned target application...')
         self.logger.debug('Target application process name: {}'.format(self.pkg))
 
@@ -102,11 +97,6 @@ class Frida(object):
         :return:
         """
         self.device.resume(self.pid)
-
-        # this work-around is temporary to prevent android applications
-        # from crashing if our instrumentation is applied
-        # for problems regarding this, please file an issue.
-        time.sleep(3)
 
     def start_session(self):
         """
