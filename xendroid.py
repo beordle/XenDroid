@@ -44,7 +44,7 @@ def run():
         try:
             r = subprocess.check_output(cmd).split('\n')
         except OSError as e:
-            raise XenDroidDependencyError(e, cmd[0])
+            raise XenDroidDependencyError(e, 'adb')
 
         if len(r) < 4:
             print 'Waiting for a connected device...'
@@ -61,8 +61,11 @@ def run():
             options.serial = r[1].split('\t')[0]
 
     logging.basicConfig(level=logging.DEBUG if options.debug_mode else logging.INFO)
-    AnalysisManager(options.path_to_apk, options.serial).start()
-    return
+    am = AnalysisManager(options.path_to_apk, options.serial)
+    try:
+        am.start()
+    finally:
+        am.roll_back()
 
 
 if __name__ == "__main__":
